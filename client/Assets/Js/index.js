@@ -2,13 +2,20 @@ let page = 0;
 const results = 15;
 let category = "articles";
 let loadMorebtn = document.querySelector('#loadMore');
-let prevClicked="";
+let article_container = document.getElementsByClassName("articles__container")[0];
+let sidemenu = document.getElementsByClassName("sidemenu")[0];
+let links = sidemenu.querySelectorAll("li");
+let banners = document.querySelectorAll('.categoryWiseBanner')[0].querySelectorAll('div');
+
+function getParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams;
+}
 
 
 window.onload = () => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    category = urlParams.get('category');
+    category = getParams().get('category');
     let anchorLi = document.querySelector(`#${category}`);
     anchorLi.firstChild.className="active";
     let bannerId = category + "Banner";
@@ -21,14 +28,9 @@ window.onload = () => {
 }
 
 loadMorebtn.onclick = () => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    category = urlParams.get('category');
+    category = getParams.get('category');
     fetchAllArticles(category);
 }
-
-
-let article_container = document.getElementsByClassName("articles__container")[0];
 
 async function fetchAllArticles(category) {
     page += 1;
@@ -41,44 +43,47 @@ async function fetchAllArticles(category) {
     }   
 
     for (let article of articles) {
-        let category_item = document.createElement('article');
-        category_item.className = "category_item";
-
-        let figure = document.createElement('figure');
-        figure.className = "category_item__figure";
-
-        let Imganchor = document.createElement('a');
-        Imganchor.className = "category_item_img_link";
-
-        let img = document.createElement('img');
-
-        let figureCap = document.createElement('figCaption');
-        figureCap.className = "category_item__figure__caption";
-
-        let h3 = document.createElement('h3');
-        let anchor = document.createElement('a');
-        let para = document.createElement('p');
-        let span = document.createElement('span');
-
-        category_item.appendChild(figure);
-        figure.appendChild(Imganchor);
-        Imganchor.appendChild(img);
-        figure.appendChild(figureCap);
-        figureCap.appendChild(anchor);
-        anchor.appendChild(h3);
-        figureCap.appendChild(para);
-        figureCap.appendChild(span);
-
-        //Data binding
-        img.src = article.image;
-        h3.innerText = article.title;
-        anchor.href = "/detail/?path=" + article.urlTitle;
-        para.innerText = article.metaDescription;
-        span.innerText = article.author;
-        article_container.appendChild(category_item);
-
+        insertArticles(article);
     }
 };
+
+function insertArticles(article){
+    let category_item = document.createElement('article');
+    category_item.className = "category_item";
+
+    let figure = document.createElement('figure');
+    figure.className = "category_item__figure";
+
+    let Imganchor = document.createElement('a');
+    Imganchor.className = "category_item_img_link";
+
+    let img = document.createElement('img');
+
+    let figureCap = document.createElement('figCaption');
+    figureCap.className = "category_item__figure__caption";
+
+    let h3 = document.createElement('h3');
+    let anchor = document.createElement('a');
+    let para = document.createElement('p');
+    let span = document.createElement('span');
+
+    category_item.appendChild(figure);
+    figure.appendChild(Imganchor);
+    Imganchor.appendChild(img);
+    figure.appendChild(figureCap);
+    figureCap.appendChild(anchor);
+    anchor.appendChild(h3);
+    figureCap.appendChild(para);
+    figureCap.appendChild(span);
+
+    //Data binding
+    img.src = article.image;
+    h3.innerText = article.title;
+    anchor.href = "/detail/?path=" + article.urlTitle;
+    para.innerText = article.metaDescription;
+    span.innerText = article.author;
+    article_container.appendChild(category_item);   
+}
 
 
 async function search() {
@@ -92,61 +97,10 @@ async function search() {
         let article_container = document.getElementsByClassName("articles__container")[0];
         article_container.innerHTML = "";
         for (let article of articles) {
-            let category_item = document.createElement('article');
-            category_item.className = "category_item";
-
-            let figure = document.createElement('figure');
-            figure.className = "category_item__figure";
-
-            let Imganchor = document.createElement('a');
-            Imganchor.className = "category_item_img_link";
-
-            let img = document.createElement('img');
-
-            let figureCap = document.createElement('figCaption');
-            figureCap.className = "category_item__figure__caption";
-
-            let h3 = document.createElement('h3');
-            let anchor = document.createElement('a');
-            let para = document.createElement('p');
-            let span = document.createElement('span');
-
-            category_item.appendChild(figure);
-            figure.appendChild(Imganchor);
-            Imganchor.appendChild(img);
-            figure.appendChild(figureCap);
-            figureCap.appendChild(h3);
-            h3.appendChild(anchor);
-            figureCap.appendChild(para);
-            figureCap.appendChild(span);
-
-            //Data binding
-            img.src = article.image;
-            h3.innerText = article.title;
-            para.innerText = article.metaDescription;
-            span.innerText = article.author;
-            article_container.appendChild(category_item);
-
+            insertArticles(article);
         }
     }
-}
-
-
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-
-
-
-
-
-let sidemenu = document.getElementsByClassName("sidemenu")[0];
-let links = sidemenu.querySelectorAll("li");
-let banners = document.querySelectorAll('.categoryWiseBanner')[0].querySelectorAll('div');
-
+}   
 
 
 links.forEach(link => {
@@ -158,3 +112,5 @@ links.forEach(link => {
 
     })
 });
+
+
