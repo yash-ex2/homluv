@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Assets/CSS/index.css" />
+    <title>Home Advice & Inspiration | HomLuv</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="nav__container">
+            <div class="head__logo__container">
+                <img src="../Images/homluv-logo-v1.svg" alt="homluv Logo" class="logo_image">
+            </div>
+            <ul class="head__nav__list">
+                <li class="head__nav__items"><a>Explore</a></li>
+                <li class="head__nav__items"><a>Map</a></li>
+                <li class="head__nav__items"><a>Trends</a></li>
+                <li class="head__nav__items">
+                    <div class="my_dream_home">
+                        <span>My Dream Home &#10084;
+                        </span>
+                        <span></span>
+                    </div>
+                </li>
+                <li class="head__nav__items">
+                    <img src="../Images/user-icon.svg" alt="user icon">
+                </li>
+            </ul>
+        </div>
+
+        <div class="subheader">
+            <h3 class="subheader__title">Home Advice & Inspiration</h3>
+            <div class="subheader__search_box">
+                <label for="">Search Articles</label>
+                <input type="text" name="textSearch" placeholder="Enter Keywords" onkeydown=search(this) id="searchTxt">
+            </div>
+        </div>
+    </header>
+
+    <main class="main__container">
+
+        <aside class="sidemenu__container">
+            <ul class="sidemenu">
+                <li id="articles"><a href="/homluv/client/?category=articles" class="=active">View All Articles</a></li>
+                <li id="trends"><a href="/homluv/client/?category=trends">Trends</a></li>
+                <li id="advice"><a href="/homluv/client/?category=advice">Advice</a></li>
+                <li id="relationshipx"><a href="/homluv/client/?category=relationships">Relationships</a></li>
+                <li id="inspiration"><a href="/homluv/client/?category=inspiration">Inspiration</a></li>
+                <li id="lifestyle"><a href="/homluv/client/?category=lifestyle">Lifestyle</a></li>
+            </ul>
+        </aside>
+        <div class="Results">
+            <section class="articles__container">
+
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <ul>
+                <li><a href="">Site Index</a></li>
+                <li><a href="">Accessibility Statement</a>
+                <li><a href="">Privacy Policy</a>
+                <li><a href="">Cookie Policy</a>
+                <li><a href="">Terms & Conditions</a>
+                <li><a href="">Do Not Sell My Personal Information</a>
+            </ul>
+            <p>Copyright © 2001-2022 Builders Digital Experience, LLC. HōmLuv.com is a trademark of Builders Digital
+                Experience, LLC and all other marks are either trademarks or registered trademarks of their respective
+                owners. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="Assets/Js/index.js"></script>
+</body>
+
+</html>
